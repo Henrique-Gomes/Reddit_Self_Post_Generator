@@ -21,10 +21,10 @@ reddit = praw.Reddit('bot_name') # change bot name
 allposts = reddit.subreddit("all")
 dest = reddit.subreddit("subreddit_name") # change name of subreddit where the self post will be made
 
-executar = True
+execute = True
 
 try:
-  while(executar):
+  while(execute):
       for last in allposts.new(limit=1):
           new_id = inc_id(last.id)
           for i in range(0,3): # you need to inc id more than once. according to your internet speed and the difference between generated id and correct id, change the range
@@ -32,9 +32,9 @@ try:
           submission = dest.submit("Post Name", url="https://www.reddit.com/r/SubredditName/comments/"+new_id+"/post_name/") # change sub-reddit and post name (in the param and in the link) (replace spaces with underscores in the link) 
           if (submission.id != new_id):
               submission.delete()
-              print("\nGenrated id:  "+str(new_id)+"\nCorrect would be: "+str(submission.id))
+              print("\nGenerated id:  "+str(new_id)+"\nCorrect would be: "+str(submission.id))
           else:
-              executar = False
+              execute = False
       # time.sleep(600) # uncomment it if there is minimum timeout to repost (generally, timeout is 10 minutes = 600 seconds)
                         # move sleep to the start of for block if you tried to use the script in this same sub-reddit recently
   input("Finished")
